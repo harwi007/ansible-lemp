@@ -1,0 +1,59 @@
+---
+    - name: Update apt repo and cache on all Debian/Ubuntu boxes
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+
+    - name: Upgrade all packages on servers
+      apt: upgrade=dist force_apt_get=yes
+
+    - name: install mysql
+      apt: name=mysql-server state=latest
+
+    - name: ensure nginx is at the latest version
+      apt: name=nginx state=latest
+    - name: install php
+      apt: name=php7.4 state=present
+    - name: install php
+      apt: name=php7.4-mbstring state=present
+    - name: install php
+      apt: name=php7.4-fpm state=present
+    - name: install php
+      apt: name=php7.4-cli state=present
+    - name: install php
+      apt: name=php7.4-mysql state=present
+    - name: install php
+      apt: name=php7.4-curl state=present
+    - name: install php
+      apt: name=php7.4-json state=present
+    - name: install python2
+      apt: name=python2 state=latest
+    - name: install make
+      apt: name=make state=latest
+    - name: install g++ 
+      apt: name=g++ state=latest
+    - name: install redis-server
+      apt: name=redis-server state=latest
+    - name: copy the nginx config file
+      copy:
+        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/nginx.conf
+        dest: /etc/nginx/
+    - name: copy the nginx default file
+      copy:
+        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/default
+        dest: /etc/nginx/sites-available
+    - name: copy php.ini
+      copy:
+        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/php.ini
+        dest: /etc/php/7.4/fpm/
+    - name: copy www.conf
+      copy:
+        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/www.conf
+        dest: /etc/php/7.4/fpm/pool.d
+    - name: copy www.conf
+      copy:
+        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/www.conf
+        dest: /etc/php/7.4/fpm/pool.d
+    - name: copy mysqld.cnf
+      copy:
+        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/mysqld.cnf
+        dest: /etc/mysql/mysql.conf.d/
+

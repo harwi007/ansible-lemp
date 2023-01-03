@@ -33,27 +33,42 @@
     - name: install redis-server
       apt: name=redis-server state=latest
     - name: copy the nginx config file
-      copy:
-        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/nginx.conf
+      ansible.builtin.copy:
+        src: nginx.conf
         dest: /etc/nginx/
     - name: copy the nginx default file
-      copy:
-        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/default
+      ansible.builtin.copy:
+        src: default
         dest: /etc/nginx/sites-available
     - name: copy php.ini
-      copy:
-        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/php.ini
+      ansible.builtin.copy:
+        src: php.ini
         dest: /etc/php/7.4/fpm/
     - name: copy www.conf
-      copy:
-        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/www.conf
+      ansible.builtin.copy:
+        src:www.conf
         dest: /etc/php/7.4/fpm/pool.d
     - name: copy www.conf
-      copy:
-        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/www.conf
+      ansible.builtin.copy:
+        src: www.conf
         dest: /etc/php/7.4/fpm/pool.d
     - name: copy mysqld.cnf
-      copy:
-        src: /mnt/d/workarea/terraform/testing/New folder/ansible-lamp/roles/lemp/files/mysqld.cnf
+      ansible.builtin.copy:
+        src: mysqld.cnf
         dest: /etc/mysql/mysql.conf.d/
-
+    - name: Restart nginx Service
+      ansible.builtin.service:
+             name: nginx
+             state: restarted
+    - name: Restart redis-server Service
+      ansible.builtin.service:
+             name: redis-server
+             state: restarted
+    - name: Stop Apache2 Service
+      ansible.builtin.service:
+             name: apache2
+             state: stopped
+    - name: Disable Apache2 Service
+      ansible.builtin.service:
+             name: apache2
+             state: disabled

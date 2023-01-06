@@ -64,7 +64,3 @@
       ansible.builtin.service:
              name: apache2
              state: stopped
-    - name: Disable Apache2 Service
-      ansible.builtin.service:
-             name: apache2
-             state: disabled

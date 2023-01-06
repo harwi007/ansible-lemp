@@ -46,10 +46,6 @@
         dest: /etc/php/7.4/fpm/
     - name: copy www.conf
       ansible.builtin.copy:
-        src:www.conf
-        dest: /etc/php/7.4/fpm/pool.d
-    - name: copy www.conf
-      ansible.builtin.copy:
         src: www.conf
         dest: /etc/php/7.4/fpm/pool.d
     - name: copy mysqld.cnf
